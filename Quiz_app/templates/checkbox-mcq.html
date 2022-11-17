@@ -1,0 +1,66 @@
+{% extends "registration/base.html" %}
+{% load static %}
+{% block content %}
+<h2 class='mx-3 my-2'>Category {{category1.title}} </h2>
+<div class='card my-4 mx-3'>
+    <h3 class='card-header'> {{option.questions}} <span class='timer float-end'></span></h3>
+    <form method='POST' action="{% url 'submit_answer_mcq' category1.id option.id %}">
+        {% csrf_token %}
+
+    <div class='card-body'>
+        <table class='table table-bordered'>
+            <tr>
+                <td><input value ='{{option.option_1}}' id ='option_1' name ='answer'type="checkbox"/></td>
+                <th><label for="option_1"></label> {{option.option_1}} </th>
+            </tr>
+            <tr>
+                <td><input value ='{{option.option_2}}' id ='option_2' name ='answer' type="checkbox"/></td>
+                <th><label for="option_2"></label> {{option.option_2}} </th>
+            </tr>
+            <tr>
+                <td><input value ='{{option.option_3}}' id ='option_3' name ='answer' type="checkbox"/></td>
+                <th><label for="option_3"></label> {{option.option_3}} </th>
+            </tr>
+            <tr>
+                <td><input value ='{{option.option_4}}' id ='option_4' name ='answer' type="checkbox"/></td>
+                <th><label for="option_4"></label> {{option.option_4}} </th>
+            </tr>
+        </table>
+    </div>
+    <div class='card-footer'>
+        <input type="submit" name='skip' value ='skip' class='btn btn-warning mx-3 skipBtn'/>
+        <input type="submit" name ='submit' value ='Submit' class='btn btn-primary submitBtn'/>
+    </div>
+</form>
+</div>
+<script src="{% static 'Quiz_app/js/jquery.js' %}"></script>
+<script type='text/javascript'>
+    $(document).ready(function(){
+         $(".submitBtn").on('click',function(){
+            var _checkedAns=$("input[name='answer']:checked").val();
+            if(_checkedAns==undefined){
+                alert('submit answer please')
+                return false;
+            }
+        });
+        $(".timer").countdowntimer({
+        seconds: {{option.time_limit}},
+        size : "sm",
+        timeUp: function(){
+            $(".skipBtn").trigger('click');
+        }
+    });
+});
+</script>
+<script type="text/javascript">
+    function printChecked() {
+        var items = document.getElementsByName("acs");
+        var selectedItems = "";
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == "checkbox" && items[i].checked == true) selectedItems += items[i].value + "\n";
+        }
+        alert(selectedItems);
+    }
+</script>
+
+{% endblock content %}

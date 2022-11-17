@@ -1,0 +1,34 @@
+{% extends "registration/base.html" %}
+{% load static %}
+{% block content %}
+<h3 class = 'mx-3 my-3'>All Categories</h3>
+<div class="row">
+    {% for category in data %}
+    <div class='col-md-4 mx-3 my-3'>
+            <div class="card" style="width: 25rem;">
+              <img src="{{category.image.url}}"  class='card-img-top' alt="Category Title">
+                <div class="card-body">
+                  <h5 class="card-title">{{category.title}}</h5>
+                  <h6>Easy Question Level one Answers</h6>
+                  <a href="{% url 'categories_questions' category.id %}" class="btn btn-primary">Start Test</a>
+                </div>
+            </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+<div class="row">
+    {% for category1 in data1 %}
+    <div class='col-md-4 mx-3 my-3'>
+            <div class="card" style="width: 25rem;">
+              <img src="{{category1.image.url}}"  class='card-img-top' alt="Category Title">
+                <div class="card-body">
+                  <h5 class="card-title">{{category1.title}}</h5>
+                  <h6>Hard Question Level Multiple Answers</h6>
+                  <a href="{% url 'mcq_index' category1.id %}" class="btn btn-primary">Start Test</a>
+                </div>
+            </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "registration/base.html" %}
+{% load static %}
+{% block title %}Home Page{% endblock title %}
+{% block content %}
+<h3 class='mx-3 my-3'>Home</h3>
+<p class='mx-3'> This App is Design for people to test there Knowledge 
+    on Programming please Navigate to Category where you can select your domain for quiz
+    below is our survey form after quiz experince you can fill it up
+</p>
+{% if user.is_authenticated %}
+<h3 class = 'mx-3 my-3'>Importent Info</h3>
+<p class='mx-3 text-red'> If you have been redirected from Category quiz It means 
+    you have been through quiz please Visit after 24 hour cooldown time </p>
+<div class='my-3'><a class = 'mx-3' href="{% url 'logout' %}">Logout</a></div>
+{% endif %}
+{% endblock content %}
+

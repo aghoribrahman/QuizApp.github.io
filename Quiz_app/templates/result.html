@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'registration/base.html' %}
+{% block content %}
+<h2 class='my-4'>Result</h2>   
+<div class='col-md-4 mx-5 my-5'>
+    <div class="card" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">Survey Form</h5>
+          <a href="{% url 'survey_form'%}" class="btn btn-primary">Go to Survey</a>
+        </div>
+    </div>
+</div>
+<table class ='table table-bordered' >
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Questions</th>
+            <th>Right Answer</th>
+            <th>Submitted Answer</th>
+            <th>Categor</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in result %}
+            <tr>
+                <td>{{row.id}}</td>
+                <td>{{row.question}}</td>
+                <td>{{row.question.answer}}</td>
+                <td>{{row.right_opt}}</td>
+                <td>{{row.question.category}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h2 class = 'my-4'>Result Detail</h2>
+<table class = 'table table-bordered' >
+    <tr>
+        <th>Total Skipped Question</th>
+        <td>{{total_skipped}}</td>
+    </tr>
+    <tr>
+        <th>Total Attempt</th>
+        <td>{{attempted}}</td>
+    </tr>
+    <tr>
+        <th>Right Answer</th>
+        <td>{{right_answer}}</td>
+    </tr>
+    <tr>
+        <th>Wrong Answer</th>
+        <td>{{wrong_answer}}</td>
+    </tr>
+    <tr>
+        <th>Final Marks</th>
+        <td>{{final_marks}}</td>
+    </tr>
+</table>
+{% endblock content %}

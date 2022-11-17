@@ -1,0 +1,64 @@
+<html lang="en">
+  <head>
+    <title>Survey Form</title>
+    <meta name="viewport" content="width=device-width"/>
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/survey-jquery@1.9.57/survey.jquery.min.js"></script>
+    <link href="https://unpkg.com/survey-core@1.9.57/survey.min.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./index.css"></head>
+  <body style="margin: 0">
+    <div id="surveyElement" style="display:inline-block;width:100%;"></div>
+    <div id="surveyResult"></div>
+    <script type="text/javascript" src="./index.js"></script>
+  <script type="text/javascript">
+    var j = "{{con}}";
+    Survey.StylesManager.applyTheme("stone");
+    var json = {
+  "showQuestionNumbers": "off",
+  "elements": [
+    {
+      "type": "matrixdropdown",
+      "name": "Feelings",
+      "title": "What do you think about quiz",
+      "columns": [
+        {
+          "name": j,
+          "cellType": "radiogroup",
+          "showInMultipleColumns": true,
+          "isRequired": true,
+          "choices": [
+            "Strongly disagree",
+            "Disagree",
+            "Neutral",
+            "Agree",
+            "Strongly agree"
+          ]
+        }, {
+          "name": "comment",
+          "title": "Please comment",
+          "cellType": "comment"
+        }
+      ],
+      "rows": [
+        "Quiz Hardness",
+        "Quilty Questions",
+        "Adequate Time",
+        "Easy Interface",
+        "Smooth Experince",
+        "Fair Marking",
+        "Recommend to Others",
+        
+      ]
+    }
+  ]
+};
+window.survey = new Survey.Model(json);
+survey.onComplete.add(function (sender) {
+  let data_info = document.querySelector('#surveyResult').textContent = "Result JSON:\n" + JSON.stringify(sender.data, null, 3);
+  document.querySelector('#surveyResult').textContent = "Result JSON:\n" + JSON.stringify(sender.data, null, 3);
+  console.log(data_info)
+});
+$("#surveyElement").Survey({model: survey});
+  </script>
+    </body>
+</html>
